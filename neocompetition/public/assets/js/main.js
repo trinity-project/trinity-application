@@ -37,6 +37,11 @@
 		// Items.
         $('.item').each(function() {
         });
-	});
+        
+        //user.register_address('demo_user');
+	//user.register_address('demo_provider');
+        //channel.register('demo_provider', 10);
+        user.transfer(null, 10);
+    });
 })(jQuery);
 

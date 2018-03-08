@@ -25,8 +25,9 @@ pub.raw_transaction = function(trad_info, user_name) {
         console.log(user_name + ' not found');
         return false;
     }
-
-    var pubKeyEncoded =getPublicKeyEncoded(ab2hexstring(user_info.asset.pub_key));
+    
+    var pub_key = getPublicKey(user_info.asset.pri_key, 0)
+    var pubKeyEncoded = getPublicKeyEncoded(ab2hexstring(pub_key));
     var signre = signatureData( trad_info, user_info.asset.pri_key);
     $.ajax({
         url: trinity_url,
@@ -34,7 +35,7 @@ pub.raw_transaction = function(trad_info, user_name) {
         data: JSON.stringify({
             "jsonrpc": "2.0",
             "method": "sendrawtransaction",
-            "params": [message.result.trad_info, signre, pubKeyEncoded],
+            "params": [trad_info, signre, pubKeyEncoded],
             "id": 1
         }),
         contentType: 'application/json',
@@ -77,19 +78,23 @@ pub.register = function(user_name, deposit) {
         }),
         contentType: 'application/json',
         success: function(message) {
-            if (message.result.error) {
-                console.log('Error in response: ', message.result.error);
-                return;
+            if (message.hasOwnProperty('result')){
+                if (message.result.error) {
+                    console.log('Error in response: ', message.result.error);
+                    return;
+                }
+                if(message.result.channel_name == null){
+                    console.log('channel name is null, trad_info: ', message.result.trad_info);
+                    return;
+                }
+                
+                // update the user channel information
+                user.update('demo_user', null, message.result.channel_name);
+                pub.raw_transaction(message.result.trad_info, 'demo_user');
+            } else {
+                console.log('error occurred during response');
+                if (message.hasOwnProperty('error')){console.log(message.error);}
             }
-            if(message.result.channel_name == null){
-                console.log('channel name is null, trad_info: ', message.result.trad_info);
-                return;
-            }
-
-            // update the user channel information
-            user.update('demo_user', null, message.result.channel_name);
-
-            raw_transaction('demo_user');
         },
         error: function(message) {
             alert("error");

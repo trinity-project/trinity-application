@@ -65,7 +65,67 @@ pub.get = function(user_name) {
 }
 
 pub.trinity_url = function() {
-    return "http://localhost:20552";
+    return "http://localhost:5000";
+}
+
+pub.register_address = function(user_name){
+    var user_info = this.get(user_name);
+    if (!user_info){
+        console.log('null user ', user_name);
+        return;
+    }
+    console.log(user_info.user);
+
+    $.ajax({
+        url: this.trinity_url(),
+        type: "POST",
+        data: JSON.stringify({
+            "jsonrpc": "2.0",
+            "method": "registeaddress",
+            "params": [user_info.asset.tnc, "", getPublicKeyEncoded(ab2hexstring(user_info.asset.pub_key))],
+            "id": 1
+        }),
+        contentType: 'application/json',
+        success: function(message) {
+        },
+        error: function(message) {
+        }
+    });
+}
+
+// send transaction to the service provider
+pub.transfer = function(asset, amount) {
+    var sender = this.get('demo_user');
+    var receiver = this.get('demo_provider');
+    var trinity_url = this.trinity_url();
+
+    $.ajax({
+        url: trinity_url,
+        type: "POST",
+        data: JSON.stringify({
+            "jsonrpc": "2.0",
+            "method": "sendertoreceiver",
+            "params": [sender.asset.tnc, receiver.asset.tnc, "b951289c1f74bbacd26390b2ff72a4f2a59bf42a78e75a3eca0dcaf0841b50f1", 'TNC', 2],
+            "id": 1
+        }),
+        contentType: 'application/json',
+        success: function(message) {
+            if (message.result && message.result.error) {
+                console.log('Error result for RPC interface sendertoreceiver: ', message.result);
+                return false;
+            } else if (message.error) {
+                console.log('Error Response for RPC interface sendertoreceiver: ', message.error)
+                return false;
+            } else {
+                console.log('Success to finish the transaction');
+                return true;
+            }
+        },
+        error: function(message) {
+            console.log(message);
+            return false;
+        }
+    });
 }
 
 return pub;
