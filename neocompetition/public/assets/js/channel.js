@@ -44,12 +44,13 @@ pub.raw_transaction = function(trad_info, user_name) {
                 console.log('response message result is equal "fail"');
                 return false;
             } else {
+                alert('Add channel successfully for user '+ user_name);
                 console.log('Succeed to add the channel')
                 return true;
             }
         },
         error: function(message) {
-            alert("error");
+            console.log("Error response after calling JSONRPC API 'sendrawtransaction'");
             return false;
         }
     });
@@ -80,12 +81,17 @@ pub.register = function(user_name, deposit) {
         success: function(message) {
             if (message.hasOwnProperty('result')){
                 if (message.result.error) {
+                    if (message.result.error == "channel already exist") {
+                        console.log('channel already exist');
+                        // re-get the channel-name
+                        return pub.getChannel();
+                    }
                     console.log('Error in response: ', message.result.error);
-                    return;
+                    return false;
                 }
                 if(message.result.channel_name == null){
                     console.log('channel name is null, trad_info: ', message.result.trad_info);
-                    return;
+                    return false;
                 }
                 
                 // update the user channel information
@@ -94,12 +100,58 @@ pub.register = function(user_name, deposit) {
             } else {
                 console.log('error occurred during response');
                 if (message.hasOwnProperty('error')){console.log(message.error);}
+                return false;
             }
         },
         error: function(message) {
-            alert("error");
+            console.log("Error response after call JSONRPC API 'registchannel'");
+            return false;
         }
     });
+}
+
+pub.getChannel = function(){
+    var demo_user = user.get('demo_user');
+    var trinity_url = user.trinity_url();
+
+    if (demo_user.channel_name) {
+        console.log("channel name is: ", demo_user.channel_name);
+        return false;
+    }
+
+    // need to get the channel name to update in the user info
+    $.ajax({
+        url: trinity_url,
+        type: "POST",
+        data: JSON.stringify({
+            "jsonrpc": "2.0",
+            "method": "getchannelstate",
+            "params": [$("#wallet_add").html()],
+            "id": 1
+        }),
+        contentType: 'application/json',
+        success: function(message) {
+            if(message.result.type == "transaction"){
+                if (message.result.message) {
+                    message.result.message.forEach((item) => {
+                        if (item.tx_info[0].address === demo_user.asset.tnc) {
+                            user.update('demo_user', null, item.channel_name);
+                            return true;
+                        }
+                    });
+                }
+
+                console.log('Could not get the channel. Msg: ', message.result)
+                return false;
+            }
+        },
+        error: function(message) {
+            console.log('Error response to call JSONRPC API getchannelstate. Msg: ', message)
+            return false;
+        }
+    });
+
+    return false;
 }
 
 return pub;

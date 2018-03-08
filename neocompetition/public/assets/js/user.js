@@ -87,6 +87,7 @@ pub.register_address = function(user_name){
         }),
         contentType: 'application/json',
         success: function(message) {
+            alert('register successfully for '+ user_name);
         },
         error: function(message) {
         }
@@ -122,7 +123,7 @@ pub.transfer = function(asset, amount) {
             }
         },
         error: function(message) {
-            console.log(message);
+            console.log("Error response after calling JSONRPC API 'sendertoreceiver'");
             return false;
         }
     });

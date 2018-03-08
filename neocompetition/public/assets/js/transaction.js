@@ -47,7 +47,8 @@ pub.transfer = function(asset, amount) {
             }
         },
         error: function(message) {
-            alert("error");
+            console.log("Error response after calling JSONRPC API 'sendertoreceiver'");
+            return false;
         }
     });
 }
