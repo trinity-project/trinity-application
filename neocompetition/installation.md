@@ -11,7 +11,7 @@ Step 2: Start the webserver by command "npm start" under neoDemo
 
 Dependencies
 ===================
-Environment: nodejs-v8.9.4 (verified) + express@4.16.2 + ejs@2.5.7
+Environment: nodejs-v8.9.4 (verified) + express@4.16.2 + ejs@2.5.7 + serve-favicon@2.4.5
 
 Others
 ===================

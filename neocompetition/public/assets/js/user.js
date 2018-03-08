@@ -64,5 +64,9 @@ pub.get = function(user_name) {
     return null;
 }
 
+pub.trinity_url = function() {
+    return "http://localhost:20552";
+}
+
 return pub;
 })();

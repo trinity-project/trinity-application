@@ -22,8 +22,10 @@ if (!String.prototype.trim) {
 pub.transfer = function(asset, amount) {
     var sender = user.get('demo_user');
     var receiver = user.get('demo_provider');
+    var trinity_url = user.trinity_url();
+
     $.ajax({
-        url: "http://localhost:20552", // Neo API
+        url: trinity_url,
         type: "POST",
         data: JSON.stringify({
             "jsonrpc": "2.0",

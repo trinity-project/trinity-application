@@ -19,6 +19,8 @@ if (!String.prototype.trim) {
 
 pub.raw_transaction = function(trad_info, user_name) {
     var user_info = user.get(user_name);
+    var trinity_url = user.trinity_url();
+
     if (!user) {
         console.log(user_name + ' not found');
         return false;
@@ -27,7 +29,7 @@ pub.raw_transaction = function(trad_info, user_name) {
     var pubKeyEncoded =getPublicKeyEncoded(ab2hexstring(user_info.asset.pub_key));
     var signre = signatureData( trad_info, user_info.asset.pri_key);
     $.ajax({
-        url: "http://47.254.39.10:20552",
+        url: trinity_url,
         type: "POST",
         data: JSON.stringify({
             "jsonrpc": "2.0",
@@ -57,6 +59,7 @@ pub.raw_transaction = function(trad_info, user_name) {
 pub.register = function(user_name, deposit) {
     var sender = user.get('demo_user');
     var receiver = user.get(user_name);
+    var trinity_url = user.trinity_url();
 
     if (!sender || !receiver) {
         console.log('sender: ', sender, ' receiver: ', receiver);
@@ -64,7 +67,7 @@ pub.register = function(user_name, deposit) {
     }
 
     $.ajax({
-        url: "http://47.254.39.10:20552",
+        url: trinity_url,
         type: "POST",
         data: JSON.stringify({
             "jsonrpc": "2.0",
