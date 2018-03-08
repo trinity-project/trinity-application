@@ -1,0 +1,17 @@
+{
+  "name": "neodemo",
+  "version": "1.0.0",
+  "description": "NEO Competition Over TRINITY",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./www/server"
+  },
+  "author": "xiaohuta",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "serve-favicon": "^2.4.5"
+  },
+  "devDependencies": {}
+}
