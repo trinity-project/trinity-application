@@ -41,18 +41,19 @@
         $('video').each(function () {
             // here we need to count the total time for statistics.
             console.log('here');
-            $(this).on(
+            /*$(this).on(
                 "timeupdate",
                 function(event){
                     console.log(this.currentTime, this.duration);
                 }
-            )
+            )*/
+            VideoEvent.on($(this));
         });
         
         user.register_address('demo_user');
 	    user.register_address('demo_provider');
         channel.register('demo_provider', 10);
-        //user.transfer(null, 10);
+        //user.transfer(null, 2);
     });
 })(jQuery);
 

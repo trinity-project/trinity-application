@@ -100,6 +100,12 @@ pub.transfer = function(asset, amount) {
     var receiver = this.get('demo_provider');
     var trinity_url = this.trinity_url();
 
+    if (!sender.channel_name) {
+        // get the channel name
+        channel.getChannel();
+        sender = this.get('demo_user');
+    }
+
     $.ajax({
         url: trinity_url,
         type: "POST",

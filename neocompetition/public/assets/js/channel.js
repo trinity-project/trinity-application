@@ -126,7 +126,7 @@ pub.getChannel = function(){
         data: JSON.stringify({
             "jsonrpc": "2.0",
             "method": "getchannelstate",
-            "params": [$("#wallet_add").html()],
+            "params": [demo_user.asset.tnc],
             "id": 1
         }),
         contentType: 'application/json',
@@ -136,13 +136,15 @@ pub.getChannel = function(){
                     message.result.message.forEach((item) => {
                         if (item.tx_info[0].address === demo_user.asset.tnc) {
                             user.update('demo_user', null, item.channel_name);
+                            console.log('Update user info. user: ' + demo_user.user + '. channel: '+ item.channel_name);
+                            alert('Update user info. user: ' + demo_user.user + '. channel: '+ item.channel_name);
                             return true;
                         }
                     });
                 }
-
-                console.log('Could not get the channel. Msg: ', message.result)
-                return false;
+            } else if (message.result.type == "signature"){
+            } else {
+                console.log('Error response via API-getchannelstate. Msg: ', message);
             }
         },
         error: function(message) {
