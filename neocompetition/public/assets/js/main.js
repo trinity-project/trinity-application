@@ -37,7 +37,11 @@
         
         user.register_address('demo_user');
         user.register_address('demo_provider');
-        channel.register('demo_provider', 10);
+
+	window.setTimeout(function() {
+            channel.register('demo_provider', 10);
+        }, 2000);
+        
     });
 })(jQuery);
 
