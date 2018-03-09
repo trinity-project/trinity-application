@@ -113,6 +113,9 @@ pub.register = function(user_name, deposit) {
 pub.getChannel = function(){
     var demo_user = user.get('demo_user');
     var trinity_url = user.trinity_url();
+    var transfer = arguments[0] ? arguments[0]:null;
+    var asset = arguments[1] ? arguments[1]:false;
+    var amount = arguments[2] ? arguments[2]:false;
 
     if (demo_user.channel_name) {
         console.log("channel name is: ", demo_user.channel_name);
@@ -138,6 +141,9 @@ pub.getChannel = function(){
                             user.update('demo_user', null, item.channel_name);
                             console.log('Update user info. user: ' + demo_user.user + '. channel: '+ item.channel_name);
                             alert('Update user info. user: ' + demo_user.user + '. channel: '+ item.channel_name);
+                            if (transfer) {
+                                transfer(asset, amount);
+                            }
                             return true;
                         }
                     });
@@ -155,6 +161,7 @@ pub.getChannel = function(){
 
     return false;
 }
+
 
 return pub;
 })();

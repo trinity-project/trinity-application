@@ -112,7 +112,7 @@ pub.transfer = function(asset, amount) {
         data: JSON.stringify({
             "jsonrpc": "2.0",
             "method": "sendertoreceiver",
-            "params": [sender.asset.tnc, receiver.asset.tnc, "b951289c1f74bbacd26390b2ff72a4f2a59bf42a78e75a3eca0dcaf0841b50f1", 'TNC', 2],
+            "params": [sender.asset.tnc, receiver.asset.tnc, sender.channel_name, 'TNC', amount],
             "id": 1
         }),
         contentType: 'application/json',

@@ -25,7 +25,7 @@ pub.on = function(video_element) {
         function(event){
             watch_time = this.currentTime;
             //console.log(this.currentTime, this.duration);
-            console.log('watch time: ', time_interval);
+            console.log('watch time: ', watch_time);
     });
 
     video_element.on(
@@ -33,8 +33,8 @@ pub.on = function(video_element) {
         function(event){
             var fee = Math.ceil(100*watch_time/60) / 100;
             // finish the payment
-            user.transfer(null, fee);
-    )
+            channel.getChannel(user.transfer, null, fee);
+    });
 }
 
 return pub;
