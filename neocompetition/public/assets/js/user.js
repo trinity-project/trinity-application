@@ -96,15 +96,15 @@ pub.register_address = function(user_name){
 
 // send transaction to the service provider
 pub.transfer = function(asset, amount) {
-    var sender = this.get('demo_user');
-    var receiver = this.get('demo_provider');
-    var trinity_url = this.trinity_url();
-
-    if (!sender.channel_name) {
-        // get the channel name
-        channel.getChannel();
-        sender = this.get('demo_user');
+    var sender = pub.get('demo_user');
+    var receiver = pub.get('demo_provider');
+    var trinity_url = pub.trinity_url();
+    var channel_name = arguments[2] ? arguments[2]:null;
+    
+    if (!channel_name) {
+        return;
     }
+    console.log(channel_name);
 
     $.ajax({
         url: trinity_url,
@@ -112,7 +112,7 @@ pub.transfer = function(asset, amount) {
         data: JSON.stringify({
             "jsonrpc": "2.0",
             "method": "sendertoreceiver",
-            "params": [sender.asset.tnc, receiver.asset.tnc, sender.channel_name, 'TNC', amount],
+            "params": [sender.asset.tnc, receiver.asset.tnc, channel_name, 'TNC', amount],
             "id": 1
         }),
         contentType: 'application/json',

@@ -142,7 +142,7 @@ pub.getChannel = function(){
                             console.log('Update user info. user: ' + demo_user.user + '. channel: '+ item.channel_name);
                             alert('Update user info. user: ' + demo_user.user + '. channel: '+ item.channel_name);
                             if (transfer) {
-                                transfer(asset, amount);
+                                transfer(asset, amount, item.channel_name);
                             }
                             return true;
                         }

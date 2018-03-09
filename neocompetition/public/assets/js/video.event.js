@@ -32,6 +32,7 @@ pub.on = function(video_element) {
         "pause",  // simulate stop or close event in order to finish payment.
         function(event){
             var fee = Math.ceil(100*watch_time/60) / 100;
+            console.log('payment fee: ', fee);
             // finish the payment
             channel.getChannel(user.transfer, null, fee);
     });
