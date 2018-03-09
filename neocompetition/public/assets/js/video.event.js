@@ -18,11 +18,23 @@ if (!String.prototype.trim) {
 }
 
 pub.on = function(video_element) {
+    var watch_time = 0;
+
     video_element.on(
         "timeupdate",
         function(event){
-            console.log(this.currentTime, this.duration);
+            watch_time = this.currentTime;
+            //console.log(this.currentTime, this.duration);
+            console.log('watch time: ', time_interval);
     });
+
+    video_element.on(
+        "pause",  // simulate stop or close event in order to finish payment.
+        function(event){
+            var fee = Math.ceil(100*watch_time/60) / 100;
+            // finish the payment
+            user.transfer(null, fee);
+    )
 }
 
 return pub;
