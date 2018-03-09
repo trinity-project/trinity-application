@@ -168,13 +168,21 @@ pub.closeChannel = function(){
     var trinity_url = user.trinity_url();
     var channel_name = arguments[2] ? arguments[2]:null;
 
+    if (!channel_name){
+        console.log('invalid channel name: ', channel_name);
+        return;
+    }
+
+    console.log(sender.asset.tnc, ' to ', receiver.asset.tnc);
+    console.log('channel: ', channel_name);
+
     $.ajax({
         url: trinity_url,
         type: "POST",
         data: JSON.stringify({
             "jsonrpc": "2.0",
             "method": "closechannel",
-            "params": [$("#wallet_add").html(), $("#info-receiver-addr").text(), $("#info-channel-name").text()],
+            "params": [sender.asset.tnc, receiver.asset.tnc, channel_name],
             "id": 1
         }),
         contentType: 'application/json',
@@ -186,7 +194,7 @@ pub.closeChannel = function(){
             }
         },
         error: function(message) {
-            console.log('Error Response with calling JSONRPC API closechannel.');
+            console.log('No Response with calling JSONRPC API closechannel.');
         }
     });
 }
