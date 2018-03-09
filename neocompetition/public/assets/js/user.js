@@ -135,5 +135,16 @@ pub.transfer = function(asset, amount) {
     });
 }
 
+pub.action = function() {
+    var element = $('.useraction')[0];
+    var logout = arguments[0] ? arguments[0]:false;
+
+    if (logout) {
+        element.innerHTML = "";
+    } else {
+        element.innerHTML = "Welcome To NEO Competition, DEMO_USER!<a id = 'signout' class = 'logout' onclick='channel.close()'>Sign Out</a>";
+    }
+}
+
 return pub;
 })();

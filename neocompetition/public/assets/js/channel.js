@@ -162,6 +162,42 @@ pub.getChannel = function(){
     return false;
 }
 
+pub.closeChannel = function(){
+    var sender = user.get('demo_user');
+    var receiver = user.get('demo_provider');
+    var trinity_url = user.trinity_url();
+    var channel_name = arguments[2] ? arguments[2]:null;
+
+    $.ajax({
+        url: trinity_url,
+        type: "POST",
+        data: JSON.stringify({
+            "jsonrpc": "2.0",
+            "method": "closechannel",
+            "params": [$("#wallet_add").html(), $("#info-receiver-addr").text(), $("#info-channel-name").text()],
+            "id": 1
+        }),
+        contentType: 'application/json',
+        success: function(message) {
+            if (message.result==""||message.result==null) {
+                console.log('Error to close channel, Msg: ', message);
+            }else{
+                console.log('Succeed to close channel.');
+            }
+        },
+        error: function(message) {
+            console.log('Error Response with calling JSONRPC API closechannel.');
+        }
+    });
+}
+
+pub.close = function(){
+    pub.getChannel(pub.closeChannel);
+    window.setTimeout(function() {
+        user.action(true);
+    }, 3000);
+}
+
 
 return pub;
 })();

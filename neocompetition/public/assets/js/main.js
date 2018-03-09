@@ -21,6 +21,9 @@
             window.setTimeout(function() {
                 $body.removeClass('is-loading');
             }, 100);
+
+            // Welcome information
+            user.action();
         });
 
 		// Fix: Placeholder polyfill.
@@ -50,9 +53,9 @@
             VideoEvent.on($(this));
         });
         
-        user.register_address('demo_user');
-        user.register_address('demo_provider');
-        channel.register('demo_provider', 10);
+        //user.register_address('demo_user');
+        //user.register_address('demo_provider');
+        //channel.register('demo_provider', 10);
         //user.transfer(null, 2);
     });
 })(jQuery);
