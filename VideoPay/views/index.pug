@@ -1,0 +1,94 @@
+extends ./layout
+
+block content
+    div(class="col-lg-12 col-md-12 col-sm-12")
+        section(id="main-reviews")
+            div(id="topMovies", class="carousel slide", data-ride="carousel")
+                h2(class="icon")
+                    i(class="fa fa-star", aria-hidden="true")
+                    span() TOP影视
+
+                div(class="carousel-control-box")
+                    a(class="left carousel-control", href="#topMovies", role="button" data-slide="prev")
+                        i(class="fa fa-chevron-left", aria-hidden="true")
+                    a(class="right carousel-control", href="#topMovies", role="button" data-slide="next")
+                        i(class="fa fa-chevron-right", aria-hidden="true")
+
+                div(class="carousel-inner", role="listbox")
+                    each movie_set, index in topmovies
+                        if 0 == index
+                            div(class="item active")
+                                div(class="row auto-clear")
+                                    each movie in movie_set
+                                        article(class="reviews col-lg-2 col-md-4 col-sm-4")
+                                            div(class="post post-medium")
+                                                a(class="thumbr post-thumb", href="#" )
+                                                    span(class="review-number") #{movie.score}
+                                                    if movie.picture
+                                                        img(src="img/thumbs/" + movie.picture, class="review img-responsive", alt="Client")
+
+                                                div(class="infor")
+                                                    h4()
+                                                        a(class="title", href="#") #{movie.name}
+                                                    //div(class="ratings")
+                                                    //    movie_ratings()
+                        else
+                            div(class="item")
+                                div(class="row auto-clear")
+                                    each movie in movie_set
+                                        article(class="reviews col-lg-2 col-md-4 col-sm-4")
+                                            div(class="post post-medium")
+                                                a(class="thumbr post-thumb", href="#")
+                                                    span(class="review-number") #{movie.score}
+                                                    if movie.picture
+                                                        img(src="img/thumbs/" + movie.picture, class="review img-responsive", alt="Client")
+
+                                                div(class="infor")
+                                                    h4()
+                                                        a(class="title", href="#") #{movie.name}
+                                                    //div(class="ratings")
+                                                    //    movie_ratings()
+
+
+    div(class="col-lg-12 col-md-12")
+        section(id="home-main")
+            h2(class="icon")
+                i(class="fa fa-television", aria-hidden="true")
+                span 热门影视
+
+            div(class="row auto-clear")
+                div(class="col-lg-4 col-md-4 col-sm-4")
+                    article(class="post post-medium")
+                        div(class="thumbr")
+                            a(class="video post-thumb", href="/play?movie=sample01.mp4", data-lity)
+                                span(class="play-btn-border", title="Play")
+                                    i(class="fa fa-play-circle headline-round" aria-hidden="true")
+                                img(class="img-responsive" src="img/thumbs/thumb-s.jpg" alt="#")
+
+                        div(class="infor")
+                            h4()
+                                a(class="title", href="#") 心灵捕手
+
+                            span(class="posts-txt", title="Posts from Channel")
+                                i(class="fa fa-thumbs-up" aria-hidden="true") 20,895
+
+                            //div(class="ratings")
+                            //    movie_ratings()
+
+                div(class="col-lg-8 col-md-8 col-sm-8")
+                    each movie in popmovies
+                        article(class="col-lg-2 col-md-3 col-sm-3")
+                            div(class="post post-medium")
+                                div(class="thumbr")
+                                    a(class="video post-thumb", href="/play?movie=sample01.mp4", data-lity)
+                                        span(class="play-btn-border", title="Play")
+                                            i(class="fa fa-play-circle headline-round" aria-hidden="true")
+                                        img(class="img-responsive" src="img/thumbs/"+movie.picture alt="#")
+
+                                div(class="infor")
+                                    h4()
+                                        a(class="title", href="#") #{movie.name}
+                                    span(class="posts-txt", title="Posts from Channel")
+                                        i(class="fa fa-thumbs-up", aria-hidden="true")
+                                        span() #{movie.score}
+

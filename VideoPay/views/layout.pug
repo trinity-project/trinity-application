@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        title
+            | Video BlockChain
+
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        meta(name="description", content="Payment system")
+        meta(name="keywords", content="Blockchain Application")
+        meta(name="referrer", content="always")
+        meta(name="author", content="Trinity Group")
+        meta(http-equiv="X-UA-Compatible", content="IE=Edge")
+        meta(content="_csrf", name="csrf-param")
+        // meta(content="<%= csrf %>" name="csrf-token")
+
+        block stylesheets
+            link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
+            link(rel='stylesheet', href='/css/screen.css')
+            link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+
+            //<link title="RSS" type="application/rss+xml" rel="alternate" href="/rss"/>
+            //<link rel="icon" href="video_icon.png" type="image/x-icon"/>
+
+        block javascripts
+            script(src="/jquery/dist/jquery.min.js")
+            script(src="/bootstrap/dist/js/bootstrap.min.js")
+            script(src="/js/video.event.js")
+            script(src="/js/channel.event.js")
+            script(src="/js/main.js")
+
+    body
+        include ./navigator-bar
+
+        div(class="container-fluid standard-bg")
+            block content
+
+        // footer
+        include ./footer

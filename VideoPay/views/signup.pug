@@ -1,0 +1,64 @@
+extends ./layout
+
+block content
+    div(class="col-lg-12 col-md-12 col-sm-12")
+        div(class="row")
+            div(class="col-lg-3 col-md-2 col-sm-2")
+            div(class="col-lg-6 col-md-8 col-sm-8")
+                div(class="register-form")
+                    h2(class="title main-head-title") 用户注册
+                    form(method="post", data-abide, novalidate)
+                        div(class="row")
+                            div(class="col-lg-2 col-md-2 col-sm-2")
+                                p 用户名：
+                            div(class="col-lg-10 col-md-10 col-sm-10")
+                                div(class="input-group")
+                                    span(class="fa fa-user login-inputicon")
+                                    input(type="text", name='name' placeholder="输入您的用户名", required)
+                        div(class="row")
+                            div(class="col-lg-2 col-md-2 col-sm-2")
+                                p 密码：
+                            div(class="col-lg-10 col-md-10 col-sm-10")
+                                div(class="input-group")
+                                    span(class="fa fa-lock login-inputicon")
+                                    input(type="password", name='password', id='password', placeholder="输入您的密码", required)
+                        div(class="row")
+                            div(class="col-lg-2 col-md-2 col-sm-2")
+                                p 资产类型：
+                            div(class="col-lg-10 col-md-10 col-sm-10")
+                                div(class="input-group")
+                                    select(name='asset_type')
+                                        option(value='tnc', default) TNC
+                                        option(value='neo', default) NEO
+                                        option(value='neo_gas', default) NEO-GAS
+                        div(class="row")
+                            div(class="col-lg-2 col-md-2 col-sm-2")
+                                p 钱包地址：
+                            div(class="col-lg-10 col-md-10 col-sm-10")
+                                div(class="input-group")
+                                    span(class="fa fa-google-wallet login-inputicon")
+                                    input(type="text", name='address', placeholder="输入您的钱包地址", required)
+                        div(class="row")
+                            div(class="col-lg-2 col-md-2 col-sm-2")
+                                p 钱包私钥：
+                            div(class="col-lg-10 col-md-10 col-sm-10")
+                                div(class="input-group")
+                                    span(class="fa fa-google-wallet login-inputicon")
+                                    input(type="text", name='private_key', placeholder="输入您的钱包私钥信息", required)
+                        div(class="row")
+                            div(class="col-lg-2 col-md-2 col-sm-2")
+                                p 钱包公钥：
+                            div(class="col-lg-10 col-md-10 col-sm-10")
+                                div(class="input-group")
+                                    span(class="fa fa-google-wallet login-inputicon")
+                                    input(type="text", name='public_key', placeholder="输入您的钱包公钥信息", required)
+                        div(class="row")
+                            div(class="col-lg-2 col-md-2 col-sm-2")
+                                p 通道押金：
+                            div(class="col-lg-10 col-md-10 col-sm-10")
+                                div(class="input-group")
+                                    span(class="fa fa-google-wallet login-inputicon")
+                                    input(type="text", name='deposit', placeholder="输入您的押金金额", required)
+                        div(class="login-btn-box")
+                            button(class="access-btn", type="submit") 注册
+            div(class="col-lg-3 col-md-2 col-sm-2")

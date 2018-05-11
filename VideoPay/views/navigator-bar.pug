@@ -1,0 +1,60 @@
+div(id="navigator-bar", class="container-fluid standard-bg")
+    div(class="row home-mega-menu")
+        div(class="col-md-12")
+            nav(class="navbar navbar-default")
+                div(class="navbar-header")
+                    button(class="navbar-toggle", type="button", data-toggle="collapse", data-target=".js-navbar-collapse")
+                        span(class="sr-only") Toggle navigation
+                        span(class="icon-bar")
+                        span(class="icon-bar")
+                        span(class="icon-bar")
+
+                div(class="collapse navbar-collapse js-navbar-collapse megabg dropshd ")
+                    ul(class="nav navbar-nav")
+                        li()
+                            a(href="/") 首页
+                        li()
+                            a(href="#") 影视分类
+                        li()
+                            a(href="/contact") 联系我们
+                    </ul>
+
+                    ul(class="social")
+                        if user
+                            li()
+                                a() 欢迎您：#{user}
+                            li()
+                                a(href="/index") 注销
+                        else
+                            li()
+                                a(id='login_href' href="/signin") 登录
+                            li()
+                                a(href="/signup") 注册
+
+                    div(class="search-block")
+                        form()
+                            input(type="search", placeholder="Search")
+        div(class="container-fluid nav-info-background")
+            div(class="row copyright-bottom")
+                div(class="col-lg-4 col-md-4 col-sm-4")
+                    if channel
+                        span(id='StateChannelName' class='social') Channel：#{channel}
+                    else
+                        span(id='StateChannelName' class='social') Channel：Invalid
+
+                div(class="col-lg-2 col-md-2 col-sm-2")
+                    if deposit
+                        span(id='StateChannelDeposit' class='social') Deposit：#{deposit}
+                    else
+                        span(id='StateChannelDeposit' class='social') Deposit：0
+
+                div(class="col-lg-2 col-md-2 col-sm-2")
+                        if balance
+                            span(id='StateChannelBalance' class='social') Balance：#{balance}
+                        else
+                            span(id='StateChannelBalance' class='social') Balance：0
+                div(class="col-lg-2 col-md-2 col-sm-2")
+                        if channel
+                            button(id='CloseStateChannel' class='social-button') 关闭通道
+                        else
+                            button(id='CloseStateChannel' class='social-button' disable) 关闭通道
